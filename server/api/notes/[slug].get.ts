@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { NoteVirtual } from "~/entities/Notes";
+import { NoteVirtual } from "~/entities/Note";
 
 export default eventHandler(async (event) => {
   const slug = getRouterParam(event, "slug");

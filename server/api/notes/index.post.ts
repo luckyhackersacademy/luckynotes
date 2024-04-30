@@ -1,8 +1,8 @@
 import slufigy from "slugify";
-import { NoteVirtual } from "~/entities/Notes";
+import { NoteVirtual } from "~/entities/Note";
 
 export default eventHandler(async (event) => {
-  // await requireUserSession(event);
+  await requireUserSession(event);
 
   const db = useDatabase();
   if (!db) {
