@@ -7,5 +7,5 @@ export interface Note {
 }
 
 export interface NoteVirtual extends Note {
-  parsed: object;
+  parsed: any;
 }

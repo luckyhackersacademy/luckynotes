@@ -8,7 +8,7 @@ const { data: note, refresh } = await useFetch<NoteVirtual>(
   `/api/notes/${route.params.slug}`,
 );
 
-const { loading, update, autosave } = useNoteUpdate({
+const { loading, update } = useNoteUpdate({
   slug: route.params.slug as string,
   note,
 });
@@ -72,7 +72,6 @@ defineOgImageComponent("Main", {
       ref="editor"
       v-model="note.content"
       class="min-h-[300px] border-0 h-full w-full outline-none resize-none"
-      @blur="autosave"
       @input="autogrow"
     />
 
@@ -90,5 +89,5 @@ defineOgImageComponent("Main", {
     </div>
   </form>
 
-  <MDCRenderer :body="note?.parsed" class="body" />
+  <MDCRenderer v-if="!isEditing" :body="note?.parsed.body" class="body" />
 </template>

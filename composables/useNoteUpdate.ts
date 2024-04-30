@@ -9,26 +9,6 @@ export function useNoteUpdate({ slug, note }: UpdateOptions) {
   const toast = useToast();
   const loading = ref<boolean>(false);
 
-  const autosave = async () => {
-    if (!slug || !note.value) {
-      return;
-    }
-
-    try {
-      await $fetch(`/api/notes/${slug}`, {
-        method: "PUT",
-        body: {
-          ...note.value,
-        },
-      });
-
-      toast.add({
-        title: "Note autosaved!",
-        color: "green",
-      });
-    } catch (_) {}
-  };
-
   const update = async () => {
     if (!slug || !note.value) {
       return;
@@ -59,5 +39,5 @@ export function useNoteUpdate({ slug, note }: UpdateOptions) {
     }
   };
 
-  return { loading, update, autosave };
+  return { loading, update };
 }
