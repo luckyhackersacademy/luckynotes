@@ -21,6 +21,7 @@
     "nuxt": "^3.11.2",
     "nuxt-auth-utils": "^0.0.24",
     "nuxt-og-image": "^3.0.0-rc.53",
+    "sharp": "^0.33.3",
     "slugify": "^1.6.6",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"

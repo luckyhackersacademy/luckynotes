@@ -13,7 +13,7 @@ export default eventHandler(async (event) => {
   if (payload?.password !== adminPassword) {
     throw createError({
       statusCode: 401,
-      message: "Wrong password",
+      message: "Provide the correct password for admin",
     });
   }
 
