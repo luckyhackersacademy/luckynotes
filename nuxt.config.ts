@@ -15,7 +15,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     adminPassword: process.env.ADMIN_PASSWORD,
-    databaseDir: resolve("./server/db"),
+    databaseDir: resolve("./server/database"),
     tursoDBURL: process.env.TURSO_DB_URL,
     tursoDBToken: process.env.TURSO_DB_TOKEN,
   },

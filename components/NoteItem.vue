@@ -5,6 +5,7 @@ dayjs.extend(localizedFormat);
 
 const props = defineProps<{
   createdAt: string;
+  isDraft: boolean;
   title: string;
 }>();
 
@@ -20,6 +21,8 @@ const time = computed(() => {
     </time>
     <span>
       {{ props.title }}
+
+      <UBadge v-if="props.isDraft" color="yellow" variant="solid">Draft</UBadge>
     </span>
   </li>
 </template>

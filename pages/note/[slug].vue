@@ -2,11 +2,12 @@
 import type { NoteVirtual } from "~/entities/Note";
 
 const { name, host, header } = useAppConfig();
-const { loggedIn } = useUserSession();
+const route = useRoute();
+const { loggedIn, fetch: refreshSession, clear } = useUserSession();
 
-const { data: notes, refresh } = await useFetch<NoteVirtual[]>("/api/notes/");
-watch(loggedIn, () => refresh())
-
+const { data: note, refresh } = await useFetch<NoteVirtual>(
+  `/api/notes/${route.params.slug}`,
+);
 
 useSeoMeta({
   titleTemplate: "%s | Luckynotes",
@@ -20,22 +21,9 @@ defineOgImageComponent("Main", {
   description: header.description || "Missing description",
   host: host || "Missing host",
 });
+console.log("note", note);
 </script>
 
 <template>
-  <Hero :title="header.title" :description="header.description" />
-
-  <NoteList v-if="notes?.length">
-    <nuxt-link
-      v-for="note in notes"
-      :key="note.slug"
-      :to="`/note/${note.slug}`"
-    >
-      <NoteItem
-        :is-draft="note.isDraft"
-        :created-at="note.createdAt"
-        :title="note.title"
-      />
-    </nuxt-link>
-  </NoteList>
+  <MDCRenderer :body="note?.parsed" class="body" />
 </template>
