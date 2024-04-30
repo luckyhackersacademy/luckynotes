@@ -15,7 +15,7 @@ const emit = defineEmits<{
 
 <template>
   <header class="flex justify-between items-center py-5">
-    <span class="text-lg font-bold">{{ props.title }}</span>
+    <nuxt-link to="/" class="text-lg font-bold">{{ props.title }}</nuxt-link>
 
     <div class="flex gap-1">
       <template v-if="props.isLogged">
