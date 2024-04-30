@@ -3,30 +3,30 @@ const isOpen = defineModel({
   default: false,
 });
 
-const password = ref<string>("");
+const name = ref<string>("");
 
 const props = defineProps<{
   loading: boolean;
 }>();
 
 const emit = defineEmits<{
-  (e: "login", password: string): void;
+  (e: "new", name: string): void;
 }>();
 </script>
 
 <template>
   <UModal v-model="isOpen">
     <form
-      @submit.prevent="() => emit('login', password)"
+      @submit.prevent="() => emit('new', name)"
       class="flex flex-col gap-2 p-5"
     >
-      <UFormGroup label="Admin password" name="password">
-        <UInput v-model="password" type="password" />
+      <UFormGroup label="Name your note" name="name">
+        <UInput v-model="name" type="text" />
       </UFormGroup>
 
       <div>
         <UButton type="submit">
-          {{ props.loading ? "Loading" : "Login" }}
+          {{ props.loading ? "Loading" : "Create" }}
         </UButton>
       </div>
     </form>

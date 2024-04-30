@@ -7,6 +7,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: "login"): void;
   (e: "logout"): void;
+  (e: "new"): void;
   // @TODO: handle theme toggleing
   (e: "toggle-theme"): void;
 }>();
@@ -17,9 +18,19 @@ const emit = defineEmits<{
     <span class="text-lg font-bold">{{ props.title }}</span>
 
     <div class="flex gap-1">
-      <UButton @click="() => emit('logout')" v-if="props.isLogged">
-        Logout
-      </UButton>
+      <template v-if="props.isLogged">
+        <UButton
+          color="gray"
+          variant="solid"
+          icon="i-heroicons-pencil-square"
+          @click="() => emit('new')"
+        >
+          New
+        </UButton>
+
+        <UButton @click="() => emit('logout')"> Logout </UButton>
+      </template>
+
       <UButton @click="() => emit('login')" v-else>Login</UButton>
     </div>
   </header>

@@ -2,16 +2,23 @@
 const { name, host, header } = useAppConfig();
 const { loggedIn, fetch: refreshSession, clear } = useUserSession();
 const colorMode = useColorMode();
+const router = useRouter();
 const { loading, password, login } = useLogin();
+const { loading: creating, title, slug, create } = useNoteCreate();
 
 colorMode.preference = "system";
 
-const isOpen = ref(false);
+const authModalIsOpen = ref(false);
+const createNoteModalIsOpen = ref(false);
 
 const { data: notes } = await useFetch("/api/notes/");
 
 const handleAuthModal = () => {
-  isOpen.value = true;
+  authModalIsOpen.value = true;
+};
+
+const handleCreateNoteModal = () => {
+  createNoteModalIsOpen.value = true;
 };
 
 const handleLogin = async (pass: string) => {
@@ -20,7 +27,13 @@ const handleLogin = async (pass: string) => {
   await login();
   await refreshSession();
 
-  isOpen.value = false;
+  authModalIsOpen.value = false;
+};
+
+const handleNewNote = async (name: string) => {
+  title.value = name;
+  await create();
+  router.push(`/note/${slug.value}`);
 };
 
 useSeoMeta({
@@ -42,12 +55,24 @@ defineOgImageComponent("Main", {
     <Header
       :title="name"
       :is-logged="loggedIn"
+      @new="handleCreateNoteModal"
       @logout="clear"
       @login="handleAuthModal"
     />
     <Hero :title="header.title" :description="header.description" />
 
-    <AuthModal v-model="isOpen" :loading="loading" @login="handleLogin" />
+    <AuthModal
+      v-model="authModalIsOpen"
+      :loading="loading"
+      @login="handleLogin"
+    />
+
+    <NewNoteModal
+      v-model="createNoteModalIsOpen"
+      :loading="creating"
+      @new="handleNewNote"
+    >
+    </NewNoteModal>
 
     <NoteList>
       <nuxt-link
