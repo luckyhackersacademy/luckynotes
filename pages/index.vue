@@ -8,6 +8,8 @@ colorMode.preference = "system";
 
 const isOpen = ref(false);
 
+const { data: notes } = await useFetch("/api/notes/");
+
 const handleAuthModal = () => {
   isOpen.value = true;
 };
@@ -46,5 +48,15 @@ defineOgImageComponent("Main", {
     <Hero :title="header.title" :description="header.description" />
 
     <AuthModal v-model="isOpen" :loading="loading" @login="handleLogin" />
+
+    <NoteList>
+      <nuxt-link
+        v-for="note in notes"
+        :key="note.slug"
+        :to="`/note/${note.slug}`"
+      >
+        <NoteItem :created-at="note.createdAt" :title="note.title" />
+      </nuxt-link>
+    </NoteList>
   </UContainer>
 </template>

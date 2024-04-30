@@ -16,6 +16,7 @@
     "@nuxt/image": "^1.6.0",
     "@nuxt/ui": "^2.15.2",
     "better-sqlite3": "^9.6.0",
+    "dayjs": "^1.11.11",
     "drizzle-kit": "^0.20.17",
     "drizzle-orm": "^0.30.9",
     "nuxt": "^3.11.2",
