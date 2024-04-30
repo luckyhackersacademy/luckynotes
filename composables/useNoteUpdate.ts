@@ -1,11 +1,11 @@
 import type { NoteVirtual } from "~/entities/Note";
 
-export interface Options {
+export interface UpdateOptions {
   slug: string;
   note: Ref<NoteVirtual | null>;
 }
 
-export function useNoteUpdate({ slug, note }: Options) {
+export function useNoteUpdate({ slug, note }: UpdateOptions) {
   const toast = useToast();
   const loading = ref<boolean>(false);
 
@@ -13,8 +13,6 @@ export function useNoteUpdate({ slug, note }: Options) {
     if (!slug || !note.value) {
       return;
     }
-
-    loading.value = true;
 
     try {
       await $fetch(`/api/notes/${slug}`, {
@@ -28,15 +26,7 @@ export function useNoteUpdate({ slug, note }: Options) {
         title: "Note autosaved!",
         color: "green",
       });
-    } catch (error) {
-      toast.add({
-        title: "Note delete error",
-        description: error.data?.message,
-        color: "red",
-      });
-    } finally {
-      loading.value = false;
-    }
+    } catch (_) {}
   };
 
   const update = async () => {

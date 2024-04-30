@@ -1,8 +1,8 @@
-export interface Options {
+export interface DeleteOptions {
   slug: Ref<string>;
 }
 
-export function useNoteDelete({ slug }: Options) {
+export function useNoteDelete({ slug }: DeleteOptions) {
   const toast = useToast();
   const loading = ref<boolean>(false);
 
