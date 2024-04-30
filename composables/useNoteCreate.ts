@@ -21,7 +21,7 @@ export function useNoteCreate() {
       slug.value = response.slug;
     } catch (error) {
       toast.add({
-        title: "Wrong password",
+        title: "Note create error",
         description: error.data?.message,
         color: "red",
       });
