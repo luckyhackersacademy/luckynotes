@@ -1,5 +1,5 @@
 export interface DeleteOptions {
-  slug: Ref<string>;
+  slug: string;
 }
 
 export function useNoteDelete({ slug }: DeleteOptions) {
@@ -7,7 +7,7 @@ export function useNoteDelete({ slug }: DeleteOptions) {
   const loading = ref<boolean>(false);
 
   const remove = async () => {
-    if (!slug.value) {
+    if (!slug) {
       return;
     }
 

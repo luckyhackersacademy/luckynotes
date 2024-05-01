@@ -1,16 +1,13 @@
-import type { NoteVirtual } from "~/entities/Note";
-
-export interface UpdateOptions {
+export interface PublishOptions {
   slug: string;
-  note: Ref<NoteVirtual | null>;
 }
 
-export function useNoteUpdate({ slug, note }: UpdateOptions) {
+export function useNotePublish({ slug }: PublishOptions) {
   const toast = useToast();
   const loading = ref<boolean>(false);
 
-  const update = async () => {
-    if (!slug || !note.value) {
+  const publish = async () => {
+    if (!slug) {
       return;
     }
 
@@ -20,17 +17,17 @@ export function useNoteUpdate({ slug, note }: UpdateOptions) {
       await $fetch(`/api/notes/${slug}`, {
         method: "PUT",
         body: {
-          ...note.value,
+          isDraft: false,
         },
       });
 
       toast.add({
-        title: "Note updated!",
+        title: "Note publish!",
         color: "green",
       });
     } catch (error) {
       toast.add({
-        title: "Note update error",
+        title: "Note publish error",
         description: error.data?.message,
         color: "red",
       });
@@ -39,5 +36,5 @@ export function useNoteUpdate({ slug, note }: UpdateOptions) {
     }
   };
 
-  return { loading, update };
+  return { loading, publish };
 }
