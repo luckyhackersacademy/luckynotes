@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@libsql/client": "^0.6.0",
-    "@nuxt/content": "^2.12.1",
     "@nuxt/eslint": "^0.3.10",
     "@nuxt/image": "^1.6.0",
     "@nuxt/ui": "^2.15.2",
+    "@nuxtjs/mdc": "^0.7.0",
     "better-sqlite3": "^9.6.0",
     "dayjs": "^1.11.11",
     "drizzle-kit": "^0.20.17",

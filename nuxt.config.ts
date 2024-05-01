@@ -7,10 +7,11 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/eslint",
     "@nuxt/ui",
-    "@nuxt/content",
+    // "@nuxt/content",
     "nuxt-og-image",
     "nuxt-auth-utils",
     "@nuxt/image",
+    "@nuxtjs/mdc",
   ],
 
   runtimeConfig: {
@@ -21,6 +22,10 @@ export default defineNuxtConfig({
   },
 
   mdc: {
+    components: {
+      prose: false,
+    },
+
     highlight: {
       theme: {
         default: "vitesse-light",
@@ -38,3 +43,4 @@ export default defineNuxtConfig({
     },
   },
 });
+

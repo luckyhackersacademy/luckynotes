@@ -3,8 +3,7 @@ const { name, author } = useAppConfig();
 const { loggedIn, fetch: refreshSession, clear } = useUserSession();
 const colorMode = useColorMode();
 
-// @TODO: MDCRenderer don't support dark mode yet
-colorMode.preference = "light";
+colorMode.preference = "system";
 
 const authModalIsOpen = ref(false);
 const createNoteModalIsOpen = ref(false);
@@ -69,7 +68,11 @@ useSeoMeta({
     </NewNoteModal>
 
     <NuxtLoadingIndicator color="cyan" />
-    <NuxtPage />
+
+    <div class="w-full pb-48">
+      <NuxtPage />
+    </div>
+
     <UNotifications />
   </UContainer>
 </template>

@@ -92,14 +92,21 @@ defineOgImageComponent("Main", {
 
   <UDivider />
 
-  <MDCRenderer v-if="!isEditing" :body="note?.parsed.body" class="prose mt-5" />
+  <article class="prose">
+    <MDCRenderer
+      v-if="!isEditing"
+      :body="note?.parsed.body"
+      :data="note?.parsed.data"
+      class="w-full mt-5"
+    />
+  </article>
 
   <form v-if="isEditing" class="mt-5" @submit.prevent="handleNoteUpdate">
     <textarea
       v-if="note"
       ref="editor"
       v-model="note.content"
-      class="editor-wrapper min-h-[300px] border-0 h-full w-full outline-none resize-none"
+      class="w-full min-h-[300px] border-0 h-full w-full outline-none resize-none"
       @input="autogrow"
     />
 
