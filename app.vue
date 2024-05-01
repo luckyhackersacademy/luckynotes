@@ -3,7 +3,8 @@ const { name, author } = useAppConfig();
 const { loggedIn, fetch: refreshSession, clear } = useUserSession();
 const colorMode = useColorMode();
 
-colorMode.preference = "system";
+// @TODO: MDCRenderer don't support dark mode yet
+colorMode.preference = "light";
 
 const authModalIsOpen = ref(false);
 const createNoteModalIsOpen = ref(false);

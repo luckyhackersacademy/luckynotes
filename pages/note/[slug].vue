@@ -99,7 +99,7 @@ defineOgImageComponent("Main", {
       v-if="note"
       ref="editor"
       v-model="note.content"
-      class="min-h-[300px] border-0 h-full w-full outline-none resize-none"
+      class="editor-wrapper min-h-[300px] border-0 h-full w-full outline-none resize-none"
       @input="autogrow"
     />
 
