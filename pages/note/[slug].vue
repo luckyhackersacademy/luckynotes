@@ -2,11 +2,20 @@
 import type { NoteVirtual } from "~/entities/Note";
 const { name, host, header } = useAppConfig();
 const route = useRoute();
+const router = useRouter();
 const { loggedIn } = useUserSession();
 
 const { data: note, refresh } = await useFetch<NoteVirtual>(
   `/api/notes/${route.params.slug}`,
 );
+
+const { loading: publishing, publish } = useNotePublish({
+  slug: route.params.slug as string,
+});
+
+const { loading: deleting, remove } = useNoteDelete({
+  slug: route.params.slug as string,
+});
 
 const { loading, update } = useNoteUpdate({
   slug: route.params.slug as string,
@@ -15,6 +24,16 @@ const { loading, update } = useNoteUpdate({
 
 const editor = ref<HTMLElement>();
 const isEditing = ref(false);
+
+const handlePublish = async () => {
+  await publish();
+  refresh();
+};
+
+const handleDelete = async () => {
+  await remove();
+  router.push("/");
+};
 
 const enableEditMode = async () => {
   if (!loggedIn.value) {
@@ -49,24 +68,33 @@ useSeoMeta({
 });
 
 defineOgImageComponent("Main", {
-  title: name || "Missing name",
+  title: note.value?.title || "Missing name",
   description: header.description || "Missing description",
   host: host || "Missing host",
 });
 </script>
 
 <template>
-  <div class="flex justify-end gap-2" v-if="loggedIn && !isEditing">
-    <UButton @click="enableEditMode">Edit this page</UButton>
-  </div>
+  <NoteTitle v-if="note" :title="note.title" :created-at="note.createdAt">
+    <template #right>
+      <div class="flex justify-end gap-2" v-if="loggedIn && !isEditing">
+        <UButton color="gray" @click="enableEditMode">Edit this page</UButton>
+        <UButton
+          v-if="note.isDraft"
+          icon="i-heroicons-check-circle"
+          @click="handlePublish"
+        >
+          {{ publishing ? "Publishing" : "Publish" }}
+        </UButton>
+      </div>
+    </template>
+  </NoteTitle>
 
-  <NoteTitle v-if="note" :title="note.title" :created-at="note.createdAt" />
+  <UDivider />
 
-  <form
-    v-if="isEditing"
-    class="editor-wrapper"
-    @submit.prevent="handleNoteUpdate"
-  >
+  <MDCRenderer v-if="!isEditing" :body="note?.parsed.body" class="prose mt-5" />
+
+  <form v-if="isEditing" class="mt-5" @submit.prevent="handleNoteUpdate">
     <textarea
       v-if="note"
       ref="editor"
@@ -82,12 +110,10 @@ defineOgImageComponent("Main", {
       <UButton
         icon="i-heroicons-trash-16-solid"
         color="red"
-        @click="enableEditMode"
+        @click="handleDelete"
       >
-        Delete
+        {{ deleting ? "Deleting" : "Delete" }}
       </UButton>
     </div>
   </form>
-
-  <MDCRenderer v-if="!isEditing" :body="note?.parsed.body" class="body" />
 </template>
