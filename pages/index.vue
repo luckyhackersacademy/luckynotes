@@ -5,8 +5,7 @@ const { name, host, header } = useAppConfig();
 const { loggedIn } = useUserSession();
 
 const { data: notes, refresh } = await useFetch<NoteVirtual[]>("/api/notes/");
-watch(loggedIn, () => refresh())
-
+watch(loggedIn, () => refresh());
 
 useSeoMeta({
   titleTemplate: "%s | Luckynotes",
@@ -38,4 +37,6 @@ defineOgImageComponent("Main", {
       />
     </nuxt-link>
   </NoteList>
+
+  <AnyNotesToShow v-else />
 </template>
