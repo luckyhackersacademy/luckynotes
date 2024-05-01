@@ -4,10 +4,14 @@ const { resolve } = createResolver(import.meta.url);
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+
+  colorMode: {
+    preference: "light",
+  },
+
   modules: [
     "@nuxt/eslint",
     "@nuxt/ui",
-    // "@nuxt/content",
     "nuxt-og-image",
     "nuxt-auth-utils",
     "@nuxt/image",

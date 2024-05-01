@@ -1,9 +1,6 @@
 <script setup lang="ts">
 const { name, author } = useAppConfig();
 const { loggedIn, fetch: refreshSession, clear } = useUserSession();
-const colorMode = useColorMode();
-
-colorMode.preference = "system";
 
 const authModalIsOpen = ref(false);
 const createNoteModalIsOpen = ref(false);
