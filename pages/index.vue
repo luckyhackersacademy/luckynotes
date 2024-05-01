@@ -15,8 +15,8 @@ useSeoMeta({
 });
 
 defineOgImageComponent("Main", {
-  title: name || "Missing name",
-  description: header.description || "Missing description",
+  title: header.description || "Missing description",
+  description: name || "Missing name",
   host: host || "Missing host",
 });
 </script>
