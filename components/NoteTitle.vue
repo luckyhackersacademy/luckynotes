@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+dayjs.extend(localizedFormat);
 
 const props = defineProps<{
   title: string;
+  createdAt: string;
 }>();
 
 const time = computed(() => {
@@ -11,8 +14,12 @@ const time = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col py-5">
-    <h1 class="font-bold text-2xl">{{ props.title }}</h1>
-    <p class="text-xl font-italic">Note written on {{ time }}</p>
+  <div class="flex justify-between items-center py-5">
+    <div class="flex flex-col">
+      <h1 class="font-bold text-2xl">{{ props.title }}</h1>
+      <p class="text-xl font-italic">Note written on {{ time }}</p>
+    </div>
+
+    <slot name="right"></slot>
   </div>
 </template>

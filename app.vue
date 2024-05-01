@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { name, host, author, header } = useAppConfig();
+const { name, author } = useAppConfig();
 const { loggedIn, fetch: refreshSession, clear } = useUserSession();
 const colorMode = useColorMode();
 
@@ -8,7 +8,7 @@ colorMode.preference = "system";
 const authModalIsOpen = ref(false);
 const createNoteModalIsOpen = ref(false);
 
-const router = useRouter()
+const router = useRouter();
 const { loading, password, login } = useLogin();
 const { loading: creating, title, slug, create } = useNoteCreate();
 
@@ -32,6 +32,7 @@ const handleLogin = async (pass: string) => {
 const handleNewNote = async (name: string) => {
   title.value = name;
   await create();
+  createNoteModalIsOpen.value = false;
   router.push(`/note/${slug.value}`);
 };
 
@@ -66,7 +67,7 @@ useSeoMeta({
     >
     </NewNoteModal>
 
-    <NuxtLoadingIndicator />
+    <NuxtLoadingIndicator color="cyan" />
     <NuxtPage />
     <UNotifications />
   </UContainer>

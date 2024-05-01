@@ -12,7 +12,7 @@ const props = defineProps<{
     style="background-image: linear-gradient(135deg, #fff 0%, #eee 100%)"
   >
     <div>
-      <h1 class="text-8xl mb-4 text-black flex items-center">
+      <h1 class="text-balance mb-4 text-black flex items-center">
         {{ props.title }}
       </h1>
       <p class="text-5xl text-gray-700 leading-tight pr-10">
