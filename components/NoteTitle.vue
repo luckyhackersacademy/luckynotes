@@ -16,10 +16,10 @@ const time = computed(() => {
 <template>
   <div class="flex justify-between items-center py-5">
     <div class="flex flex-col">
-      <h1 class="font-bold text-2xl">{{ props.title }}</h1>
-      <p class="text-base font-italic" v-if="props.title">
+      <span class="text-xs" v-if="props.title">
         Note written on {{ time }}
-      </p>
+      </span>
+      <h1 class="font-bold text-2xl">{{ props.title }}</h1>
     </div>
 
     <slot name="right"></slot>
