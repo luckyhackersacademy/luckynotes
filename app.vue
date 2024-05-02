@@ -70,6 +70,8 @@ useSeoMeta({
       <NuxtPage />
     </div>
 
+    <Footer :twitter="author.twitter" />
+
     <UNotifications />
   </UContainer>
 </template>
