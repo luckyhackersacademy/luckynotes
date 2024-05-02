@@ -92,7 +92,7 @@ defineOgImageComponent("Main", {
 
   <UDivider />
 
-  <article class="prose prose-primary dark:prose-invert max-w-none">
+  <article class="prose prose-primary dark:prose-invert">
     <MDCRenderer
       v-if="!isEditing"
       :body="note?.parsed.body"
