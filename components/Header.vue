@@ -18,6 +18,7 @@ const emit = defineEmits<{
     <nuxt-link to="/" class="text-lg font-bold">{{ props.title }}</nuxt-link>
 
     <div class="flex gap-1">
+      <DarkModeSwitcher />
       <template v-if="props.isLogged">
         <UButton
           color="gray"
