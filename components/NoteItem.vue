@@ -15,7 +15,7 @@ const time = computed(() => {
 </script>
 
 <template>
-  <li class="flex gap-2">
+  <li class="flex flex-col md:flex-row gap-0 md:gap-2">
     <time class="opacity-75 w-[120px]" v-if="props.createdAt">
       {{ time }}
     </time>
