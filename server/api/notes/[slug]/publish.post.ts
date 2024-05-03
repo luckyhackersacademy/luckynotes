@@ -1,5 +1,19 @@
 import { eq } from "drizzle-orm";
 
+type TweetOptions = {
+  title: string;
+  url: string;
+};
+
+const tweet = ({
+  title,
+  url,
+}: TweetOptions) => `I've just published a new note: ${title}
+Check it out: ${url}
+
+#indiehacker #buildinpublic #learninpublic
+`;
+
 export default eventHandler(async (event) => {
   await requireUserSession(event);
 
@@ -9,7 +23,6 @@ export default eventHandler(async (event) => {
   }
 
   const { publishing, host } = useAppConfig();
-  const { tweetText } = useTwitter();
   const db = useDatabase();
   if (!db) {
     throw createError({ statusCode: 500, message: "Database not available" });
@@ -24,9 +37,12 @@ export default eventHandler(async (event) => {
     .returning();
 
   if (publishing.twitter) {
+    const { tweetText } = useTwitter();
     const url = `https://${host}/note/${slug}`;
-    const text = `I've just published a new note: ${note.title} \nCheck it out: ${url}`;
-    console.log("tweet!", text);
+    const text = tweet({
+      url,
+      title: note.title,
+    });
 
     await tweetText(text);
   }
