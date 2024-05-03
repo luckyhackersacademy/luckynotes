@@ -14,11 +14,8 @@ export function useNotePublish({ slug }: PublishOptions) {
     loading.value = true;
 
     try {
-      await $fetch(`/api/notes/${slug}`, {
-        method: "PUT",
-        body: {
-          isDraft: false,
-        },
+      await $fetch(`/api/notes/${slug}/publish`, {
+        method: "POST",
       });
 
       toast.add({

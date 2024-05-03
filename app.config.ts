@@ -7,6 +7,10 @@ export default defineAppConfig({
     twitter: "igorhalfeld",
   },
 
+  publishing: {
+    twitter: true,
+  },
+
   header: {
     title: "Hi there 👋",
     description:

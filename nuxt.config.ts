@@ -19,6 +19,11 @@ export default defineNuxtConfig({
   ],
 
   runtimeConfig: {
+    twitterAPIKey: process.env.TWITTER_API_KEY,
+    twitterAPISecret: process.env.TWITTER_API_SECRET,
+    twitterAccessToken: process.env.TWITTER_ACCESS_TOKEN,
+    twitterAccessSecret: process.env.TWITTER_ACCESS_SECRET,
+
     adminPassword: process.env.ADMIN_PASSWORD,
     databaseDir: resolve("./server/database"),
     tursoDBURL: process.env.TURSO_DB_URL,
@@ -47,4 +52,3 @@ export default defineNuxtConfig({
     },
   },
 });
-
