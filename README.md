@@ -21,25 +21,13 @@ As you probably noticed, this entire app can run on an edge network 😜, [NuxtA
 
 ## Features
 
-Stupid simple login
-
-![Imgur](https://imgur.com/rsNk8jl.png)
-
-Logout and create new notes
-
-![Imgur](https://imgur.com/ePLJfGM.png)
-
-When you create new notes, they're visible only to you until you publish
-
-![Imgur](https://imgur.com/10pr43c.png)
-
-Publish draft notes and edit markdown directly in the browser
-
-![Imgur](https://imgur.com/2IyAuqi.png)
-
-And of course, it's possible to delete notes
-
-![Imgur](https://i.imgur.com/T0PtTyi.png)
+- Stupid simple login
+- Logout and create new notes
+- When you create new notes, they're visible only to you until you publish
+- Draft notes can be accessed by the URL
+- Publish draft notes and edit markdown directly in the browser
+- When you publish a note, you can configure to publish on twitter as well (don't forget to set publishing.twitter to true on app.config.ts)
+- And of course, it's possible to delete notes
 
 ## How can you set up this by yourself?
 
