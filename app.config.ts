@@ -1,7 +1,7 @@
 export default defineAppConfig({
   name: "João's lucky notes",
   description: "Build & learn in public notes",
-  host: "notes.jopcmelo.com",
+  host: "notes.jopcmelo.dev",
 
   author: {
     twitter: "jopcmelo",
