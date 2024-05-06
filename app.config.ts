@@ -1,10 +1,10 @@
 export default defineAppConfig({
-  name: "Igor's lucky notes",
+  name: "João's lucky notes",
   description: "Build & learn in public notes",
-  host: "notes.igorhalfeld.com",
+  host: "notes.jopcmelo.com",
 
   author: {
-    twitter: "igorhalfeld",
+    twitter: "jopcmelo",
   },
 
   publishing: {
