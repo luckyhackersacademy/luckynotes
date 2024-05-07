@@ -18,11 +18,6 @@ export default defineNuxtConfig({
     "@nuxtjs/mdc",
   ],
 
-  routeRules: {
-    '/': { swr: true },
-    '/notes': { swr: true },
-  },
-
   runtimeConfig: {
     twitterAPIKey: process.env.TWITTER_API_KEY,
     twitterAPISecret: process.env.TWITTER_API_SECRET,
