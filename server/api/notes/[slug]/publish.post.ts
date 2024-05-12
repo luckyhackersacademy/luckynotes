@@ -23,6 +23,7 @@ export default eventHandler(async (event) => {
   }
 
   const { publishing, host } = useAppConfig();
+  const { nodeEnv } = useRuntimeConfig();
   const db = useDatabase();
   if (!db) {
     throw createError({ statusCode: 500, message: "Database not available" });
@@ -36,7 +37,8 @@ export default eventHandler(async (event) => {
     .where(eq(tables.notes.slug, slug))
     .returning();
 
-  if (publishing.twitter) {
+  const isProd = nodeEnv === "production";
+  if (publishing.twitter && isProd) {
     const { tweetText } = useTwitter();
     const url = `https://${host}/note/${slug}`;
     const text = tweet({
