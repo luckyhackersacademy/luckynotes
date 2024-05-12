@@ -21,8 +21,8 @@ As you probably noticed, this entire app can run on an edge network 😜, [NuxtA
 
 ## Features
 
-- Stupid simple login
-- Logout and create new notes
+- Stupid simple login and logout
+- Create new notes
 - When you create new notes, they're visible only to you until you publish
 - Draft notes can be accessed by the URL
 - Publish draft notes and edit markdown directly in the browser
