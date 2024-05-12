@@ -8,8 +8,8 @@ export function useCacheWithOneHourTTL() {
   }
 
   const get = async <T>(slug: string) => {
-    const cached = await useStorage<T>().getItem(slug)
-    return cached
+    const cached = await useStorage().getItem(slug)
+    return cached as T
   }
 
   return { get, set }

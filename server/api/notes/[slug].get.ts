@@ -8,7 +8,7 @@ export default eventHandler(async (event) => {
   }
 
   const { get, set } = useCacheWithOneHourTTL()
-  const cachedNote = await get(slug)
+  const cachedNote = await get<NoteVirtual>(slug)
 
   if (cachedNote) {
     return cachedNote
