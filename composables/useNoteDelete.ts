@@ -4,14 +4,14 @@ export interface DeleteOptions {
 
 export function useNoteDelete({ slug }: DeleteOptions) {
   const toast = useToast();
-  const loading = ref<boolean>(false);
+  const { start, finish, progress: loading } = useLoadingIndicator();
 
   const remove = async () => {
     if (!slug) {
       return;
     }
 
-    loading.value = true;
+    start();
 
     try {
       await $fetch(`/api/notes/${slug}`, {
@@ -29,7 +29,7 @@ export function useNoteDelete({ slug }: DeleteOptions) {
         color: "red",
       });
     } finally {
-      loading.value = false;
+      finish();
     }
   };
 

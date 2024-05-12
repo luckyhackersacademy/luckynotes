@@ -4,10 +4,10 @@ export function useNoteCreate() {
   const toast = useToast();
   const title = ref<string>();
   const slug = ref<string>();
-  const loading = ref<boolean>(false);
+  const { start, finish, progress: loading } = useLoadingIndicator();
 
   const create = async () => {
-    loading.value = true;
+    start();
 
     try {
       const response = await $fetch<NoteVirtual>("/api/notes", {
@@ -26,7 +26,7 @@ export function useNoteCreate() {
         color: "red",
       });
     } finally {
-      loading.value = false;
+      finish();
     }
   };
 

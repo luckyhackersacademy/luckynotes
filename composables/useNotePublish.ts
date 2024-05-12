@@ -4,14 +4,14 @@ export interface PublishOptions {
 
 export function useNotePublish({ slug }: PublishOptions) {
   const toast = useToast();
-  const loading = ref<boolean>(false);
+  const { start, finish, progress: loading } = useLoadingIndicator();
 
   const publish = async () => {
     if (!slug) {
       return;
     }
 
-    loading.value = true;
+    start();
 
     try {
       await $fetch(`/api/notes/${slug}/publish`, {
@@ -29,7 +29,7 @@ export function useNotePublish({ slug }: PublishOptions) {
         color: "red",
       });
     } finally {
-      loading.value = false;
+      finish();
     }
   };
 

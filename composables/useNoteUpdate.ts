@@ -7,14 +7,14 @@ export interface UpdateOptions {
 
 export function useNoteUpdate({ slug, note }: UpdateOptions) {
   const toast = useToast();
-  const loading = ref<boolean>(false);
+  const { start, finish, progress: loading } = useLoadingIndicator();
 
   const update = async () => {
     if (!slug || !note.value) {
       return;
     }
 
-    loading.value = true;
+    start();
 
     try {
       await $fetch(`/api/notes/${slug}`, {
@@ -35,7 +35,7 @@ export function useNoteUpdate({ slug, note }: UpdateOptions) {
         color: "red",
       });
     } finally {
-      loading.value = false;
+      finish();
     }
   };
 

@@ -1,10 +1,10 @@
 export function useLogin() {
   const toast = useToast();
-  const loading = ref<boolean>(false);
+  const { start, finish, progress: loading } = useLoadingIndicator();
   const password = ref<string>();
 
   const login = async () => {
-    loading.value = true;
+    start();
 
     try {
       await $fetch("/api/login", {
@@ -18,7 +18,7 @@ export function useLogin() {
         color: "red",
       });
     } finally {
-      loading.value = false;
+      finish();
     }
   };
 
