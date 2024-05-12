@@ -4,7 +4,7 @@ export interface DeleteOptions {
 
 export function useNoteDelete({ slug }: DeleteOptions) {
   const toast = useToast();
-  const { start, finish, progress: loading } = useLoadingIndicator();
+  const { start, finish, isLoading: loading } = useLoadingIndicator();
 
   const remove = async () => {
     if (!slug) {

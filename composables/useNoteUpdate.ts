@@ -7,7 +7,7 @@ export interface UpdateOptions {
 
 export function useNoteUpdate({ slug, note }: UpdateOptions) {
   const toast = useToast();
-  const { start, finish, progress: loading } = useLoadingIndicator();
+  const { start, finish, isLoading: loading } = useLoadingIndicator();
 
   const update = async () => {
     if (!slug || !note.value) {

@@ -1,6 +1,6 @@
 export function useLogin() {
   const toast = useToast();
-  const { start, finish, progress: loading } = useLoadingIndicator();
+  const { start, finish, isLoading: loading } = useLoadingIndicator();
   const password = ref<string>();
 
   const login = async () => {

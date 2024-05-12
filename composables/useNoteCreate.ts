@@ -4,7 +4,7 @@ export function useNoteCreate() {
   const toast = useToast();
   const title = ref<string>();
   const slug = ref<string>();
-  const { start, finish, progress: loading } = useLoadingIndicator();
+  const { start, finish, isLoading: loading } = useLoadingIndicator();
 
   const create = async () => {
     start();

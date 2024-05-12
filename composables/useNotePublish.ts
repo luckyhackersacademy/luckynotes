@@ -4,7 +4,7 @@ export interface PublishOptions {
 
 export function useNotePublish({ slug }: PublishOptions) {
   const toast = useToast();
-  const { start, finish, progress: loading } = useLoadingIndicator();
+  const { start, finish, isLoading: loading } = useLoadingIndicator();
 
   const publish = async () => {
     if (!slug) {
