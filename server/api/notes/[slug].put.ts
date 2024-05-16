@@ -9,7 +9,7 @@ export default eventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'Missing slug' })
   }
 
-  const { set } = useCacheWithOneHourTTL()
+  const { set } = useCacheWithOneWeekTTL()
   const db = useDatabase()
   if (!db) {
     throw createError({ statusCode: 500, message: 'Database not available' })

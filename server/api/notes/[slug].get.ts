@@ -7,7 +7,7 @@ export default eventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'Missing slug' })
   }
 
-  const { get, set } = useCacheWithOneHourTTL()
+  const { get, set } = useCacheWithOneWeekTTL()
   const cachedNote = await get<NoteVirtual>(slug)
 
   if (cachedNote) {

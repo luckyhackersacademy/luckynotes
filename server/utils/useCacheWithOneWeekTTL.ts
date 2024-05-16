@@ -1,9 +1,9 @@
-const ONE_HOUR_TTL = 60 * 60
+const ONE_WEEK_TTL = 60 * 60 * 24 * 7
 
-export function useCacheWithOneHourTTL() {
+export function useCacheWithOneWeekTTL() {
   const set = async (slug: string, note: any) => {
     await useStorage().setItem(slug, note, {
-      ttl: ONE_HOUR_TTL,
+      ttl: ONE_WEEK_TTL,
     })
   }
 
