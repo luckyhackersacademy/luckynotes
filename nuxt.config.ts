@@ -32,14 +32,6 @@ export default defineNuxtConfig({
     nodeEnv: process.env.NODE_ENV,
   },
 
-  nitro: {
-    prerender: {
-      crawlLinks: true,
-      routes: ['/', 'sitemap.xml'],
-      ignore: ['/tak', '/konfiguration', '/checkout'],
-    },
-  },
-
   sitemap: {
     sources: ['/api/sitemap'],
   },
@@ -66,4 +58,3 @@ export default defineNuxtConfig({
     },
   },
 })
-
