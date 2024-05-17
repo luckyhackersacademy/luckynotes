@@ -7,7 +7,7 @@ export default defineNitroPlugin(async (nitroApp) => {
     return
   }
 
-  const { name, host, author } = useAppConfig()
+  const { name, header, host, author } = useAppConfig()
 
   const notes = await db.select().from(tables.notes).all()
 
@@ -15,6 +15,7 @@ export default defineNitroPlugin(async (nitroApp) => {
     feed.options = {
       id: host,
       title: name,
+      description: header.description,
       link: `https://${host}`,
       copyright: author.twitter,
     }
