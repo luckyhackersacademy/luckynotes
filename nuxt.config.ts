@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     'nuxt-auth-utils',
     '@nuxt/image',
     '@nuxtjs/mdc',
+    'nuxt-module-feed',
     '@nuxtjs/sitemap',
   ],
 
@@ -34,6 +35,16 @@ export default defineNuxtConfig({
 
   sitemap: {
     sources: ['/api/sitemap'],
+  },
+
+  feed: {
+    sources: [
+      {
+        path: '/feed.xml',
+        type: 'rss2',
+        cacheTime: 60 * 15,
+      },
+    ],
   },
 
   mdc: {
