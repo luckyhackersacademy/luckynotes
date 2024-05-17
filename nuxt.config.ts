@@ -44,6 +44,11 @@ export default defineNuxtConfig({
         type: 'rss2',
         cacheTime: 60 * 15,
       },
+      {
+        path: '/rss.xml',
+        type: 'rss2',
+        cacheTime: 60 * 15,
+      },
     ],
   },
 

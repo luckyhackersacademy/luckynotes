@@ -11,7 +11,24 @@ export default defineNitroPlugin(async (nitroApp) => {
 
   const notes = await db.select().from(tables.notes).all()
 
-  async function createFeedXml(feed: Feed) {
+  // any cuz it's only a dto
+  const items: any[] = []
+
+  for (const note of notes) {
+    const content = await parseMarkdown(note.content)
+    const raw = sanitizeHtml(content, { allowedTags: ['img', 'a', 'p', 'strong', 'b', 'i', 'em', 'hr'] })
+
+    items.push({
+      title: note.title,
+      id: `https://${host}/note/${note.slug}`,
+      link: `https://${host}/note/${note.slug}`,
+      description: raw.slice(0, 200),
+      content: raw,
+      date: note.createdAt,
+    })
+  }
+
+  function createFeedXml(feed: Feed) {
     feed.options = {
       id: host,
       title: name,
@@ -20,17 +37,14 @@ export default defineNitroPlugin(async (nitroApp) => {
       copyright: author.twitter,
     }
 
-    for (const note of notes) {
-      const content = await parseMarkdown(note.content)
-      const raw = sanitizeHtml(content, { allowedTags: ['img', 'a', 'p', 'strong', 'b', 'i', 'em', 'hr'] })
-
+    for (const item of items) {
       feed.addItem({
-        title: note.title,
-        id: `https://${host}/note/${note.slug}`,
-        link: `https://${host}/note/${note.slug}`,
-        description: raw.slice(0, 200),
-        content: raw,
-        date: note.createdAt,
+        title: item.title,
+        id: item.id,
+        link: item.link,
+        description: item.description,
+        content: item.content,
+        date: item.date,
       })
     }
 
@@ -44,7 +58,11 @@ export default defineNitroPlugin(async (nitroApp) => {
   nitroApp.hooks.hook('feed:generate', async ({ feed, options }: NitroCtx) => {
     switch (options.path) {
       case '/feed.xml': {
-        await createFeedXml(feed)
+        createFeedXml(feed)
+        break
+      }
+      case '/rss.xml': {
+        createFeedXml(feed)
         break
       }
     }
