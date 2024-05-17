@@ -9,6 +9,7 @@ export default defineAppConfig({
     twitter: 'igorhalfeld',
   },
 
+  // auto publish notes configs
   publishing: {
     twitter: true,
   },

@@ -27,6 +27,8 @@ As you probably noticed, this entire app can run on an edge network 😜, [NuxtA
 - Draft notes can be accessed by the URL
 - Publish draft notes and edit markdown directly in the browser
 - When you publish a note, you can configure to publish on twitter as well (don't forget to set publishing.twitter to true on app.config.ts)
+- RSS feed (`/feed.xml`) automatically generated
+- Sitemap (`/sitemap.xml`) automatically generated
 - And of course, it's possible to delete notes
 
 ## How can you set up this by yourself?
