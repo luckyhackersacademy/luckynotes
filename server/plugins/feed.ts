@@ -1,5 +1,8 @@
 import type { NitroCtx, Feed } from 'nuxt-module-feed'
 import sanitizeHtml from 'sanitize-html'
+import markdownit from 'markdown-it'
+
+const md = markdownit()
 
 export default defineNitroPlugin(async (nitroApp) => {
   const db = useDatabase()
@@ -15,7 +18,7 @@ export default defineNitroPlugin(async (nitroApp) => {
   const items: any[] = []
 
   for (const note of notes) {
-    const content = await parseMarkdown(note.content)
+    const content = md.render(note.content)
     const raw = sanitizeHtml(content, { allowedTags: ['img', 'a', 'p', 'strong', 'b', 'i', 'em', 'hr'] })
 
     items.push({

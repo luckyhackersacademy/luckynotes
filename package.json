@@ -20,6 +20,7 @@
     "dayjs": "^1.11.11",
     "drizzle-kit": "^0.20.17",
     "drizzle-orm": "^0.30.9",
+    "markdown-it": "^14.1.0",
     "nuxt": "^3.11.1",
     "nuxt-auth-utils": "^0.0.24",
     "nuxt-og-image": "^3.0.0-rc.53",
