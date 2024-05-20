@@ -5,6 +5,7 @@ type TweetOptions = {
   url: string
 }
 
+// @TODO: should use sanitaze-html to put preview note here
 const tweet = ({ title, url }: TweetOptions) => `I've just published a new note: ${title}
 Check it out: ${url}
 
