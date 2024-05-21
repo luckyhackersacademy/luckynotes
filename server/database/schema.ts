@@ -14,13 +14,13 @@ export const notes = sqliteTable('notes', {
 })
 
 export const noteLikes = sqliteTable('note_likes', {
-  slug: text('slug').primaryKey(),
+  id: text('id').primaryKey(),
   noteId: text('slug').references(() => notes.slug),
   userId: text('userId'),
 })
 
 export const noteViews = sqliteTable('note_views', {
-  slug: text('slug').primaryKey(),
+  id: text('id').primaryKey(),
   noteId: text('slug').references(() => notes.slug),
   userId: text('userId'),
 })
