@@ -84,7 +84,9 @@ defineOgImageComponent('Main', {
     </template>
   </NoteTitle>
 
-  <UDivider />
+  <NoteInfo :views="100" :likes="1" @like="() => ({})" :alreadyLiked="false" />
+
+  <UDivider class="my-5" />
 
   <article class="prose prose-primary dark:prose-invert">
     <MDCRenderer v-if="!isEditing" :body="note?.parsed.body" :data="note?.parsed.data" class="w-full mt-5" />

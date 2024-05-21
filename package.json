@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^4.3.0",
     "@libsql/client": "^0.6.0",
     "@nuxt/eslint": "^0.3.10",
     "@nuxt/image": "^1.6.0",
