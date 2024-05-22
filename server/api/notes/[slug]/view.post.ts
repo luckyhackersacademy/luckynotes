@@ -1,4 +1,4 @@
-import { eq, sql } from 'drizzle-orm'
+import { and, eq, sql } from 'drizzle-orm'
 import { v4 } from 'uuid'
 import { NoteVirtual } from '~/entities/Note'
 
@@ -21,7 +21,11 @@ export default eventHandler(async (event) => {
 
   const payload = await readBody<LikeRequest>(event)
 
-  const viewed = await db.select({ id: tables.noteViews.id }).from(tables.noteViews).get()
+  const viewed = await db
+    .select({ id: tables.noteViews.id })
+    .from(tables.noteViews)
+    .where(and(eq(tables.noteViews.userId, payload.userId), eq(tables.noteViews.noteId, slug)))
+    .get()
 
   if (viewed?.id) {
     return
