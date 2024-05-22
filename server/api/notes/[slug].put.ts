@@ -9,7 +9,7 @@ export default eventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'Missing slug' })
   }
 
-  const { set } = useCacheWithOneWeekTTL()
+  const { get, set } = useCacheWithOneWeekTTL()
   const db = useDatabase()
   if (!db) {
     throw createError({ statusCode: 500, message: 'Database not available' })
@@ -17,7 +17,7 @@ export default eventHandler(async (event) => {
 
   const payload = await readBody<NoteVirtual>(event)
 
-  const { createdAt } = await db
+  await db
     .update(tables.notes)
     .set({
       title: payload.title,
@@ -25,17 +25,14 @@ export default eventHandler(async (event) => {
       isDraft: payload.isDraft,
     })
     .where(eq(tables.notes.slug, slug))
-    .returning({ createdAt: tables.notes.createdAt })
     .get()
 
-  await set(slug, {
-    slug,
-    title: payload.title,
-    content: payload.content,
-    isDraft: payload.isDraft ?? false,
-    createdAt: createdAt.toISOString(),
-    parsed: await parseMarkdown(payload.content),
-  })
+  const cachedNote = await get<NoteVirtual>(slug)
+  cachedNote.title = payload.title
+  cachedNote.content = payload.content
+  cachedNote.isDraft = payload.isDraft
+
+  await set(slug, { ...cachedNote })
 
   return { slug }
 })
