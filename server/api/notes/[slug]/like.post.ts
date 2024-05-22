@@ -1,5 +1,6 @@
 import { eq, sql } from 'drizzle-orm'
 import { v4 } from 'uuid'
+import { NoteVirtual } from '~/entities/Note'
 
 interface LikeRequest {
   userId: string
