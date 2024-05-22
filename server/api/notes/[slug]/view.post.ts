@@ -1,5 +1,6 @@
 import { eq, sql } from 'drizzle-orm'
 import { v4 } from 'uuid'
+import { NoteVirtual } from '~/entities/Note'
 
 interface LikeRequest {
   userId: string
@@ -19,6 +20,15 @@ export default eventHandler(async (event) => {
   }
 
   const payload = await readBody<LikeRequest>(event)
+
+  const viewed = await db.select({ id: tables.noteViews.id }).from(tables.noteViews).get()
+
+  if (viewed?.id) {
+    return
+  }
+
+  const { get, set } = useCacheWithOneWeekTTL()
+  const cachedNote = await get<NoteVirtual>(slug)
   const id = v4()
 
   await db.transaction(
@@ -42,6 +52,10 @@ export default eventHandler(async (event) => {
       behavior: 'deferred',
     },
   )
+
+  cachedNote.viewCount += 1
+
+  await set(slug, { ...cachedNote })
 
   return { id }
 })

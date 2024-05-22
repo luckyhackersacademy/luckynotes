@@ -32,6 +32,8 @@ export default eventHandler(async (event) => {
     slug,
     title: note.title,
     content: note.content,
+    viewCount: note.viewCount ?? 0,
+    likeCount: note.likeCount ?? 0,
     isDraft: note.isDraft ?? false,
     createdAt: note.createdAt.toISOString(),
     parsed: await parseMarkdown(note.content),

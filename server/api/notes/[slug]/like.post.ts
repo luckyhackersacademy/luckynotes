@@ -19,6 +19,9 @@ export default eventHandler(async (event) => {
   }
 
   const payload = await readBody<LikeRequest>(event)
+
+  const { get, set } = useCacheWithOneWeekTTL()
+  const cachedNote = await get<NoteVirtual>(slug)
   const id = v4()
 
   await db.transaction(
@@ -42,6 +45,10 @@ export default eventHandler(async (event) => {
       behavior: 'deferred',
     },
   )
+
+  cachedNote.likeCount += 1
+
+  await set(slug, { ...cachedNote })
 
   return { id }
 })
