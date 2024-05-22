@@ -13,12 +13,14 @@ export default eventHandler(async (event) => {
   }
 
   const note = await db
-    .select()
+    .select({
+      id: tables.noteLikes.id,
+    })
     .from(tables.noteLikes)
     .where(and(eq(tables.noteLikes.userId, userId), eq(tables.noteLikes.noteId, slug)))
     .get()
 
-  if (!note) {
+  if (!note?.id) {
     throw createError({
       statusCode: 404,
       message: 'Like not found for userId provided',
