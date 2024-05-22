@@ -5,6 +5,10 @@ const props = defineProps<{
   alreadyLiked: boolean
 }>()
 
+const emit = defineEmits<{
+  (e: 'like'): void
+}>()
+
 const viewLabel = computed(() => {
   if (props.views > 1) {
     return `${props.views} views`
@@ -25,7 +29,13 @@ const likeLabel = computed(() => {
 <template>
   <div class="flex gap-2">
     <UButton icon="i-heroicons-chart-bar" disabled color="cyan" variant="soft"> {{ viewLabel }} </UButton>
-    <UButton icon="i-heroicons-hand-thumb-up" :disabled="props.alreadyLiked" color="cyan" variant="soft">
+    <UButton
+      @click="() => emit('like')"
+      icon="i-heroicons-hand-thumb-up"
+      :disabled="props.alreadyLiked"
+      color="cyan"
+      variant="soft"
+    >
       {{ likeLabel }}
     </UButton>
   </div>

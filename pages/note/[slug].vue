@@ -20,8 +20,25 @@ const { loading, update } = useNoteUpdate({
   note,
 })
 
+const { userId } = useUserId()
+
+const { liked, like } = useNoteLike({
+  slug: route.params.slug as string,
+  userId,
+})
+
+useNoteView({
+  slug: route.params.slug as string,
+  userId,
+})
+
 const editor = ref<HTMLElement>()
 const isEditing = ref(false)
+
+const handleLike = async () => {
+  await like()
+  refresh()
+}
 
 const handlePublish = async () => {
   await publish()
@@ -84,7 +101,7 @@ defineOgImageComponent('Main', {
     </template>
   </NoteTitle>
 
-  <NoteInfo :views="100" :likes="1" @like="() => ({})" :alreadyLiked="false" />
+  <NoteInfo :views="note.viewCount" :likes="note.likeCount" @like="handleLike()" :alreadyLiked="liked" />
 
   <UDivider class="my-5" />
 
