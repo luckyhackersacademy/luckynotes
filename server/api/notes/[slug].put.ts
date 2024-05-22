@@ -17,7 +17,7 @@ export default eventHandler(async (event) => {
 
   const payload = await readBody<NoteVirtual>(event)
 
-  await db
+  const { likeCount, viewCount, createdAt } = await db
     .update(tables.notes)
     .set({
       title: payload.title,
@@ -25,6 +25,11 @@ export default eventHandler(async (event) => {
       isDraft: payload.isDraft,
     })
     .where(eq(tables.notes.slug, slug))
+    .returning({
+      likeCount: tables.notes.likeCount,
+      viewCount: tables.notes.viewCount,
+      createdAt: tables.notes.createdAt,
+    })
     .get()
 
   const cachedNote = await get<NoteVirtual>(slug)
@@ -32,7 +37,16 @@ export default eventHandler(async (event) => {
   cachedNote.content = payload.content
   cachedNote.isDraft = payload.isDraft
 
-  await set(slug, { ...cachedNote })
+  await set(slug, {
+    slug,
+    likeCount,
+    viewCount,
+    title: payload.title,
+    content: payload.content,
+    isDraft: payload.isDraft ?? false,
+    createdAt: createdAt.toISOString(),
+    parsed: await parseMarkdown(payload.content),
+  })
 
   return { slug }
 })
