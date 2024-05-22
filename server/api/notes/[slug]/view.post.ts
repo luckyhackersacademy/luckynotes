@@ -7,8 +7,6 @@ interface LikeRequest {
 }
 
 export default eventHandler(async (event) => {
-  await requireUserSession(event)
-
   const slug = getRouterParam(event, 'slug')
   if (!slug) {
     throw createError({ statusCode: 400, message: 'Missing slug' })
