@@ -48,5 +48,7 @@ defineOgImageComponent('Main', {
     </div>
   </NoteList>
 
-  <AnyNotesToShow v-else />
+  <EmptyTextSection v-else>
+    <p>There are no notes to show yet.</p>
+  </EmptyTextSection>
 </template>
