@@ -45,9 +45,10 @@ export default eventHandler(async (event) => {
     },
   )
 
-  cachedNote.likeCount += 1
-
-  await set(slug, { ...cachedNote })
+  if (cachedNote) {
+    cachedNote.likeCount += 1
+    await set(slug, { ...cachedNote })
+  }
 
   return { id }
 })
