@@ -101,7 +101,13 @@ defineOgImageComponent('Main', {
     </template>
   </NoteTitle>
 
-  <NoteInfo v-if="note" :views="note.viewCount" :likes="note.likeCount" @like="handleLike()" :alreadyLiked="liked" />
+  <NoteInfo
+    v-if="note && !isEditing"
+    :views="note.viewCount"
+    :likes="note.likeCount"
+    @like="handleLike()"
+    :alreadyLiked="liked"
+  />
 
   <UDivider class="my-5" />
 
