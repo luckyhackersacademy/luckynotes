@@ -101,7 +101,7 @@ defineOgImageComponent('Main', {
     </template>
   </NoteTitle>
 
-  <NoteInfo
+  <NoteStats
     v-if="note && !isEditing"
     :views="note.viewCount"
     :likes="note.likeCount"
