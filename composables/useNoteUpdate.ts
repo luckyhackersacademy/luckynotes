@@ -1,43 +1,43 @@
-import type { NoteVirtual } from "~/entities/Note";
+import type { NoteVirtual } from '~/entities/Note'
 
 export interface UpdateOptions {
-  slug: string;
-  note: Ref<NoteVirtual | null>;
+  slug: string
+  note: Ref<NoteVirtual | null>
 }
 
 export function useNoteUpdate({ slug, note }: UpdateOptions) {
-  const toast = useToast();
-  const loading = ref<boolean>(false);
+  const toast = useToast()
+  const { start, finish, isLoading: loading } = useLoadingIndicator()
 
   const update = async () => {
     if (!slug || !note.value) {
-      return;
+      return
     }
 
-    loading.value = true;
+    start()
 
     try {
       await $fetch(`/api/notes/${slug}`, {
-        method: "PUT",
+        method: 'PUT',
         body: {
           ...note.value,
         },
-      });
+      })
 
       toast.add({
-        title: "Note updated!",
-        color: "green",
-      });
+        title: 'Note updated!',
+        color: 'green',
+      })
     } catch (error) {
       toast.add({
-        title: "Note update error",
+        title: 'Note update error',
         description: error.data?.message,
-        color: "red",
-      });
+        color: 'red',
+      })
     } finally {
-      loading.value = false;
+      finish()
     }
-  };
+  }
 
-  return { loading, update };
+  return { loading, update }
 }

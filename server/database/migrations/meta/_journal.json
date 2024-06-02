@@ -8,6 +8,27 @@
       "when": 1714501868679,
       "tag": "0000_true_thanos",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1716331622799,
+      "tag": "0001_bumpy_master_mold",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1716331811583,
+      "tag": "0002_marvelous_manta",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1716333027652,
+      "tag": "0003_perfect_maelstrom",
+      "breakpoints": true
     }
   ]
 }

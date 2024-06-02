@@ -7,17 +7,17 @@ export default defineAppConfig({
     twitter: "jopcmelo",
   },
 
+  // auto publish notes configs
   publishing: {
     twitter: true,
   },
 
   header: {
-    title: "Hi there 👋",
-    description:
-      "Welcome to my notes! here I share my thoughts, ideas, and learnings.",
+    title: 'Hi there 👋',
+    description: 'Welcome to my notes! here I share my thoughts, ideas, and learnings.',
   },
 
   ui: {
-    primary: "cyan",
+    primary: 'cyan',
   },
-});
+})

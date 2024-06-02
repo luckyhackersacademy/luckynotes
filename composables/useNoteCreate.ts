@@ -1,39 +1,39 @@
-import type { NoteVirtual } from "~/entities/Note";
+import type { NoteVirtual } from '~/entities/Note'
 
 export function useNoteCreate() {
-  const toast = useToast();
-  const title = ref<string>();
-  const slug = ref<string>();
-  const loading = ref<boolean>(false);
+  const toast = useToast()
+  const title = ref<string>()
+  const slug = ref<string>()
+  const { start, finish, isLoading: loading } = useLoadingIndicator()
 
   const create = async () => {
-    loading.value = true;
+    start()
 
     try {
-      const response = await $fetch<NoteVirtual>("/api/notes", {
-        method: "POST",
+      const response = await $fetch<NoteVirtual>('/api/notes', {
+        method: 'POST',
         body: {
           title: title.value,
-          content: "# Hello world!",
+          content: '# Hello world!',
         },
-      });
+      })
 
-      slug.value = response.slug;
+      slug.value = response.slug
     } catch (error) {
       toast.add({
-        title: "Note create error",
+        title: 'Note create error',
         description: error.data?.message,
-        color: "red",
-      });
+        color: 'red',
+      })
     } finally {
-      loading.value = false;
+      finish()
     }
-  };
+  }
 
   return {
     loading,
     title,
     slug,
     create,
-  };
+  }
 }

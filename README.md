@@ -21,12 +21,15 @@ As you probably noticed, this entire app can run on an edge network 😜, [NuxtA
 
 ## Features
 
-- Stupid simple login
-- Logout and create new notes
+- Stupid simple login and logout
+- Create new notes
 - When you create new notes, they're visible only to you until you publish
 - Draft notes can be accessed by the URL
 - Publish draft notes and edit markdown directly in the browser
 - When you publish a note, you can configure to publish on twitter as well (don't forget to set publishing.twitter to true on app.config.ts)
+- RSS feed (`/feed.xml`) automatically generated
+- Sitemap (`/sitemap.xml`) automatically generated
+- View and like count without the need to login (powered by fingerprintjs)
 - And of course, it's possible to delete notes
 
 ## How can you set up this by yourself?

@@ -1,37 +1,37 @@
 export interface PublishOptions {
-  slug: string;
+  slug: string
 }
 
 export function useNotePublish({ slug }: PublishOptions) {
-  const toast = useToast();
-  const loading = ref<boolean>(false);
+  const toast = useToast()
+  const { start, finish, isLoading: loading } = useLoadingIndicator()
 
   const publish = async () => {
     if (!slug) {
-      return;
+      return
     }
 
-    loading.value = true;
+    start()
 
     try {
       await $fetch(`/api/notes/${slug}/publish`, {
-        method: "POST",
-      });
+        method: 'POST',
+      })
 
       toast.add({
-        title: "Note publish!",
-        color: "green",
-      });
+        title: 'Note publish!',
+        color: 'green',
+      })
     } catch (error) {
       toast.add({
-        title: "Note publish error",
+        title: 'Note publish error',
         description: error.data?.message,
-        color: "red",
-      });
+        color: 'red',
+      })
     } finally {
-      loading.value = false;
+      finish()
     }
-  };
+  }
 
-  return { loading, publish };
+  return { loading, publish }
 }

@@ -1,37 +1,37 @@
 export interface DeleteOptions {
-  slug: string;
+  slug: string
 }
 
 export function useNoteDelete({ slug }: DeleteOptions) {
-  const toast = useToast();
-  const loading = ref<boolean>(false);
+  const toast = useToast()
+  const { start, finish, isLoading: loading } = useLoadingIndicator()
 
   const remove = async () => {
     if (!slug) {
-      return;
+      return
     }
 
-    loading.value = true;
+    start()
 
     try {
       await $fetch(`/api/notes/${slug}`, {
-        method: "DELETE",
-      });
+        method: 'DELETE',
+      })
 
       toast.add({
-        title: "Note deleted!",
-        color: "green",
-      });
+        title: 'Note deleted!',
+        color: 'green',
+      })
     } catch (error) {
       toast.add({
-        title: "Note delete error",
+        title: 'Note delete error',
         description: error.data?.message,
-        color: "red",
-      });
+        color: 'red',
+      })
     } finally {
-      loading.value = false;
+      finish()
     }
-  };
+  }
 
-  return { loading, remove };
+  return { loading, remove }
 }

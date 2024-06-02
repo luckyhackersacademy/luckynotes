@@ -1,30 +1,30 @@
 export function useLogin() {
-  const toast = useToast();
-  const loading = ref<boolean>(false);
-  const password = ref<string>();
+  const toast = useToast()
+  const { start, finish, isLoading: loading } = useLoadingIndicator()
+  const password = ref<string>()
 
   const login = async () => {
-    loading.value = true;
+    start()
 
     try {
-      await $fetch("/api/login", {
-        method: "POST",
+      await $fetch('/api/login', {
+        method: 'POST',
         body: { password: password.value },
-      });
+      })
     } catch (error) {
       toast.add({
-        title: "Wrong password",
+        title: 'Wrong password',
         description: error.data?.message,
-        color: "red",
-      });
+        color: 'red',
+      })
     } finally {
-      loading.value = false;
+      finish()
     }
-  };
+  }
 
   return {
     loading,
     password,
     login,
-  };
+  }
 }

@@ -1,21 +1,23 @@
-import { createResolver } from "nuxt/kit";
+import { createResolver } from 'nuxt/kit'
 
-const { resolve } = createResolver(import.meta.url);
+const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
   colorMode: {
-    preference: "light",
+    preference: 'light',
   },
 
   modules: [
-    "@nuxt/eslint",
-    "@nuxt/ui",
-    "nuxt-og-image",
-    "nuxt-auth-utils",
-    "@nuxt/image",
-    "@nuxtjs/mdc",
+    '@nuxt/eslint',
+    '@nuxt/ui',
+    'nuxt-og-image',
+    'nuxt-auth-utils',
+    '@nuxt/image',
+    '@nuxtjs/mdc',
+    'nuxt-module-feed',
+    '@nuxtjs/sitemap',
   ],
 
   runtimeConfig: {
@@ -25,9 +27,29 @@ export default defineNuxtConfig({
     twitterAccessSecret: process.env.TWITTER_ACCESS_SECRET,
 
     adminPassword: process.env.ADMIN_PASSWORD,
-    databaseDir: resolve("./server/database"),
+    databaseDir: resolve('./server/database'),
     tursoDBURL: process.env.TURSO_DB_URL,
     tursoDBToken: process.env.TURSO_DB_TOKEN,
+    nodeEnv: process.env.NODE_ENV,
+  },
+
+  sitemap: {
+    sources: ['/api/sitemap'],
+  },
+
+  feed: {
+    sources: [
+      {
+        path: '/feed.xml',
+        type: 'rss2',
+        cacheTime: 60 * 15,
+      },
+      {
+        path: '/rss.xml',
+        type: 'rss2',
+        cacheTime: 60 * 15,
+      },
+    ],
   },
 
   mdc: {
@@ -37,8 +59,8 @@ export default defineNuxtConfig({
 
     highlight: {
       theme: {
-        default: "vitesse-light",
-        dark: "material-theme-palenight",
+        default: 'vitesse-light',
+        dark: 'material-theme-palenight',
       },
     },
   },
@@ -46,9 +68,9 @@ export default defineNuxtConfig({
   eslint: {
     config: {
       stylistic: {
-        quotes: "single",
-        commaDangle: "never",
+        quotes: 'single',
+        commaDangle: 'never',
       },
     },
   },
-});
+})
