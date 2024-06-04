@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import markdownit from 'markdown-it'
 import type { NoteVirtual } from '~/entities/Note'
 const { name, host, header } = useAppConfig()
 const route = useRoute()
@@ -32,8 +33,13 @@ useNoteView({
   userId,
 })
 
+const md = markdownit()
 const editor = ref<HTMLElement>()
 const isEditing = ref(false)
+
+const noteContentPreview = computed(() => {
+  return md.render(note.value?.content)
+})
 
 const handleLike = async () => {
   await like()
@@ -120,13 +126,20 @@ defineOgImageComponent('Main', {
   </article>
 
   <form v-if="isEditing" class="mt-5" @submit.prevent="handleNoteUpdate">
-    <textarea
-      v-if="note"
-      ref="editor"
-      v-model="note.content"
-      class="w-full min-h-[300px] border-0 h-full outline-none resize-none"
-      @input="autogrow"
-    />
+    <div class="flex gap-2">
+      <textarea
+        v-if="note"
+        ref="editor"
+        v-model="note.content"
+        class="flex-1 min-h-[300px] border-0 h-full outline-none resize-none"
+        @input="autogrow"
+      />
+
+      <article
+        class="flex-1 hidden lg:block prose prose-primary dark:prose-invert"
+        v-html="noteContentPreview"
+      ></article>
+    </div>
 
     <div class="flex gap-2">
       <UButton type="submit">
