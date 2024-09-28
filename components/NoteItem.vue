@@ -16,13 +16,14 @@ const time = computed(() => {
 
 <template>
   <li class="flex flex-col md:flex-row gap-0 md:gap-2">
-    <time class="opacity-75 w-[120px]" v-if="props.createdAt">
-      {{ time }}
-    </time>
-    <span>
+    <span class="underline">
       {{ props.title }}
 
       <UBadge v-if="props.isDraft" color="yellow" variant="solid">Draft</UBadge>
     </span>
+
+    <time class="opacity-75 w-auto text-gray-600" v-if="props.createdAt">
+      {{ time }}
+    </time>
   </li>
 </template>
