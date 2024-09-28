@@ -22,7 +22,7 @@ const time = computed(() => {
       <UBadge v-if="props.isDraft" color="yellow" variant="solid">Draft</UBadge>
     </span>
 
-    <time class="opacity-75 w-auto text-gray-600" v-if="props.createdAt">
+    <time class="opacity-75 w-auto text-gray-600 dark:text-gray-200" v-if="props.createdAt">
       {{ time }}
     </time>
   </li>
