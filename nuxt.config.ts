@@ -16,7 +16,6 @@ export default defineNuxtConfig({
     'nuxt-auth-utils',
     '@nuxt/image',
     '@nuxtjs/mdc',
-    'nuxt-module-feed',
     '@nuxtjs/sitemap',
   ],
 

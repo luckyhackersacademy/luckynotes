@@ -22,6 +22,7 @@
     "dayjs": "^1.11.11",
     "drizzle-kit": "^0.20.17",
     "drizzle-orm": "^0.30.9",
+    "feed": "^4.2.2",
     "markdown-it": "^14.1.0",
     "nuxt": "^3.11.1",
     "nuxt-auth-utils": "^0.0.24",
@@ -36,7 +37,6 @@
   "devDependencies": {
     "@types/markdown-it": "^14.1.1",
     "@types/sanitize-html": "^2.11.0",
-    "@types/uuid": "^9.0.8",
-    "nuxt-module-feed": "^1.1.4"
+    "@types/uuid": "^9.0.8"
   }
 }
