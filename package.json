@@ -24,7 +24,7 @@
     "drizzle-orm": "^0.30.9",
     "feed": "^4.2.2",
     "markdown-it": "^14.1.0",
-    "nuxt": "^3.11.1",
+    "nuxt": "^3.14.1592",
     "nuxt-auth-utils": "^0.0.24",
     "nuxt-og-image": "^3.0.0-rc.53",
     "sanitize-html": "^2.13.0",
