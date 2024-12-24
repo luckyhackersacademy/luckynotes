@@ -1,6 +1,4 @@
-import { createResolver } from 'nuxt/kit'
-
-const { resolve } = createResolver(import.meta.url)
+// import { createResolver } from 'nuxt/kit'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -26,7 +24,7 @@ export default defineNuxtConfig({
     twitterAccessSecret: process.env.TWITTER_ACCESS_SECRET,
 
     adminPassword: process.env.ADMIN_PASSWORD,
-    databaseDir: resolve('./server/database'),
+    databaseDir: './server/database',
     tursoDBURL: process.env.TURSO_DB_URL,
     tursoDBToken: process.env.TURSO_DB_TOKEN,
     nodeEnv: process.env.NODE_ENV,
