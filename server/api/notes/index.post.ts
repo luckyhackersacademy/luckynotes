@@ -1,5 +1,5 @@
 import slufigy from 'slugify'
-import { NoteVirtual } from '~/entities/Note'
+import type { NoteVirtual } from '~/entities/Note'
 
 export default eventHandler(async (event) => {
   await requireUserSession(event)
