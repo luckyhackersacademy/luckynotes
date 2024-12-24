@@ -36,21 +36,6 @@ export default defineNuxtConfig({
     sources: ['/api/sitemap'],
   },
 
-  feed: {
-    sources: [
-      {
-        path: '/feed.xml',
-        type: 'rss2',
-        cacheTime: 60 * 15,
-      },
-      {
-        path: '/rss.xml',
-        type: 'rss2',
-        cacheTime: 60 * 15,
-      },
-    ],
-  },
-
   mdc: {
     components: {
       prose: false,
