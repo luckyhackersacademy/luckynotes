@@ -11,8 +11,8 @@ export const useDatabase = () => {
   if (tursoDBURL && tursoDBToken) {
     database = drizzleLibSQL(
       createLibSQLClient({
-        url: process.env.TURSO_DB_URL!,
-        authToken: process.env.TURSO_DB_TOKEN!,
+        url: tursoDBURL,
+        authToken: tursoDBToken,
       }),
     );
   }
