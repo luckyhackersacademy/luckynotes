@@ -20,7 +20,6 @@ export const useRSSFeed = async ({
     return
   }
 
-
   const feed = new Feed({
     id: host,
     title: name,

@@ -1,14 +1,18 @@
 export default eventHandler(async (event) => {
   const { name, header, host } = useAppConfig()
 
-  const { createFeedAtom } = await useRSSFeed({
+  const fns = await useRSSFeed({
     name,
     description: header.descripton,
     host: `https://${host}`,
     lang: 'en',
   });
 
-  const feed = createFeedAtom();
+  if (!fns) {
+    return
+  }
+
+  const feed = fns.createFeedAtom();
   setResponseHeader(
     event,
     'Content-Type',
