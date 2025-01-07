@@ -34,6 +34,10 @@ export default defineNuxtConfig({
     sources: ['/api/sitemap'],
   },
 
+  build: {
+    exclude: ['shiki'],  // Or explicitly exclude it if it's not needed
+  },
+
   mdc: {
     components: {
       prose: false,
