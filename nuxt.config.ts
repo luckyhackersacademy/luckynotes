@@ -35,7 +35,7 @@ export default defineNuxtConfig({
   },
 
   build: {
-    exclude: ['shiki'],  // Or explicitly exclude it if it's not needed
+    transpile: ['shiki'],  // Or explicitly exclude it if it's not needed
   },
 
   mdc: {
